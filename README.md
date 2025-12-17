@@ -6,14 +6,14 @@ Aplicação Laravel para gerenciamento de vinhos.
 
 ### Pré-requisitos
 
-- Docker Desktop instalado e em execução
+- Docker instalado e em execução
 - Git
 
 ### Instalação
 
-1. **Clone o repositório** (se ainda não fez):
+1. **Clone o repositório**:
 ```bash
-git clone <url-do-repositorio>
+git clone git@github.com:petrusnog/vinishop.git
 cd vinishop
 ```
 
@@ -22,15 +22,24 @@ cd vinishop
 cp .env.example .env
 ```
 
-3. **Suba os containers com Sail**:
+3. **Instale as dependências com Docker** (cria a pasta vendor):
 ```bash
-./vendor/bin/sail up -d
+docker run --rm \
+    -u "$(id -u):$(id -g)" \
+    -v "$(pwd):/var/www/html" \
+    -w /var/www/html \
+    laravelsail/php83-composer:latest \
+    composer install --ignore-platform-reqs
 ```
 
-4. **Instale as dependências** (se necessário):
+**Windows (PowerShell):**
+```powershell
+docker run --rm -v ${PWD}:/var/www/html -w /var/www/html laravelsail/php83-composer:latest composer install --ignore-platform-reqs
+```
+
+4. **Suba os containers com Sail**:
 ```bash
-./vendor/bin/sail composer install
-./vendor/bin/sail npm install
+./vendor/bin/sail up -d
 ```
 
 5. **Gere a chave da aplicação**:
@@ -43,7 +52,12 @@ cp .env.example .env
 ./vendor/bin/sail artisan migrate
 ```
 
-7. **Compile os assets** (opcional):
+7. **Instale dependências do NPM**:
+```bash
+./vendor/bin/sail npm install
+```
+
+8. **Compile os assets** (opcional):
 ```bash
 ./vendor/bin/sail npm run dev
 ```
