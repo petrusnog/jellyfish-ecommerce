@@ -1,4 +1,4 @@
-# Jellyfish E-commerce
+# Jellyfish
 
 Plataforma de e-commerce desenvolvida em Laravel com processamento de pedidos via mensageria (RabbitMQ).
 
