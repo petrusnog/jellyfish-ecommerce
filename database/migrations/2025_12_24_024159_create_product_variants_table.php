@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('product_id')->constrained()->onDelete('cascade');
             $table->enum('size', ['S', 'M', 'L', 'XL']);
             $table->string('color');
+            $table->string('image_url')->nullable();
             $table->decimal('additional_price', 10, 2)->nullable();
             $table->timestamps();
         });
