@@ -17,7 +17,31 @@ class ProductFactory extends Factory
     public function definition(): array
     {
         return [
-            ''
+            'title' => fake()->words(2, true),
+            'description' => fake()->sentence(),
+            'base_price' => fake()->randomFloat(2, 1, 100),
+            'category' => fake()->randomElement(['shirt', 'cap', 'mug']),
         ];
+    }
+
+    public function shirt(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'category' => 'shirt',
+        ]);
+    }
+
+    public function cap(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'category' => 'cap',
+        ]);
+    }
+
+    public function mug(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'category' => 'mug',
+        ]);
     }
 }
