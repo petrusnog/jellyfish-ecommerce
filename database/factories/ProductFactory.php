@@ -20,7 +20,7 @@ class ProductFactory extends Factory
             'title' => fake()->words(2, true),
             'description' => fake()->sentence(),
             'base_price' => fake()->randomFloat(2, 1, 100),
-            'category' => fake()->randomElement(['shirt', 'cap', 'mug']),
+            'category' => fake()->randomElement(['shirt', 'mug']),
         ];
     }
 
@@ -28,13 +28,6 @@ class ProductFactory extends Factory
     {
         return $this->state(fn (array $attributes) => [
             'category' => 'shirt',
-        ]);
-    }
-
-    public function cap(): static
-    {
-        return $this->state(fn (array $attributes) => [
-            'category' => 'cap',
         ]);
     }
 
